@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>USE HTML</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: inline-block;
+            width: 70px;
+        }
+        input[type="text"], input[type="number"] {
+            padding: 5px;
+            width: 200px;
+        }
+        button {
+            padding: 10px 15px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>USE HTML</h1>
+
+    <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" placeholder="Enter your name">
+    </div>
+
+    <div class="form-group">
+        <label for="age">Age:</label>
+        <input type="number" id="age" placeholder="Enter your age">
+    </div>
+
+    <div class="form-group">
+        <label for="add">Add:</label>
+        <input type="text" id="add" placeholder="Enter add info">
+    </div>
+
+    <button onclick="exitPage()">Exit</button>
+
+    <script>
+        function exitPage() {
+            const name = document.getElementById("name").value;
+            const age = document.getElementById("age").value;
+            const add = document.getElementById("add").value;
+            const dataToSave = `Name: ${name}\nAge: ${age}\nAdd: ${add}`;
+
+            downloadFile(dataToSave);
+
+            setTimeout(() => {
+                alert("File saved. Press Ctrl + W to close this tab manually if it doesn't close automatically.");
+                window.close();
+            }, 500); 
+        }
+
+        function downloadFile(content) {
+            const blob = new Blob([content], { type: "text/plain" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = "user_info.txt";
+            document.body.appendChild(link); 
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+</body>
+</html>
